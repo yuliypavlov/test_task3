@@ -6,7 +6,9 @@ This project is a REST API for managing cats, breeds, and ratings as part of an 
 
 - Python 3.9 or higher
 - pip
-- PostgreSQL
+- PostgreSQL (if running outside of Docker)
+- Docker
+- Docker Compose
 
 ## Setup
 
@@ -19,28 +21,7 @@ Follow these steps to set up the project:
     cd <repository-folder>
     ```
 
-2. **Create and activate a virtual environment**
-
-    ```
-    python -m venv venv
-    ```
-
-    - On Windows:
-      ```
-      venv\Scripts\activate
-      ```
-    - On macOS/Linux:
-      ```
-      source venv/bin/activate
-      ```
-
-3. **Install the required packages**
-
-    ```
-    pip install -r requirements.txt
-    ```
-
-4. **Set up the environment variables**
+2. **Create .env file in the root of the project and add the following environment variables in it**
 
     ```
     touch .env
@@ -48,26 +29,26 @@ Follow these steps to set up the project:
     DB_NAME=your_db_name
     DB_USER=your_db_user
     DB_PASSWORD=your_db_password
-    DB_HOST=localhost
+    DB_HOST=db
     DB_PORT=5432
     SECRET_KEY=your_secret_key
     ```
 
-5. **Apply migrations**
+3. **Use Docker Compose to run the project**
 
     ```
-    python manage.py migrate
+    docker-compose up -d
     ```
 
-## Running the Project
+4. **Apply migrations**
 
-```
-python manage.py runserver
-```
+    ```
+    docker-compose exec cat_exhibition python manage.py migrate
+    ```
 
 ## Testing the API
 
-**Send a POST request to /auth/users/ to create a new user:**
+**Send a POST request to /auth/users/ to create a new user**
 
 ```
 {
@@ -76,7 +57,7 @@ python manage.py runserver
 }
 ```
 
-**Send a POST request to /auth/jwt/create/ to obtain an access token:**
+**Send a POST request to /auth/jwt/create/ to obtain an access token**
 
 ```
 {
