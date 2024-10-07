@@ -34,7 +34,7 @@ def test_cat_filter_by_breed(authenticated_client, breed):
 @pytest.mark.django_db
 def test_create_rating(authenticated_client, rating):
     """
-    Test filtering cats by breed.
+    Test the creation of a new breed.
     """
     url = reverse('rating-list')
 
